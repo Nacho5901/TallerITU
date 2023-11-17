@@ -21,7 +21,7 @@ function obtenerRutinaEjercicios(imc, sexo) {
     var rutinaElement = document.getElementById('rutina');
 
     if (imc < 18.5) {
-        mostrarDocumento(C:\Users\Ryzen 5 3600\Documents\TallerITU\bajo_peso.html, rutinaElement);
+        mostrarDocumento(bajo_peso.html, rutinaElement);
         return 'Rutina de ejercicios recomendada para bajo peso.';
     } else if (imc >= 18.5 && imc < 24.9) {
         mostrarDocumento(peso_normal.html, rutinaElement);
@@ -42,7 +42,7 @@ function obtenerRutinaEjercicios(imc, sexo) {
 
 function mostrarDocumento(documento, elemento) {
     // Carga el contenido del documento en el elemento especificado
-    fetch(documento)
+    fetch(`https://nacho5901.github.io/TallerITU/${documento}`)
         .then(response => response.text())
         .then(content => {
             elemento.innerHTML = content;
