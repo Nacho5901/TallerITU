@@ -18,13 +18,11 @@ function calcularIMC() {
 }
 
 function obtenerRutinaEjercicios(imc, sexo) {
-    var rutinaElement = document.getElementById('rutina');
-
     if (imc < 18.5) {
-        mostrarDocumento(bajo_peso.html, rutinaElement);
+        mostrarDocumento('bajo_peso.html', rutinaElement);
         return 'Rutina de ejercicios recomendada para bajo peso.';
     } else if (imc >= 18.5 && imc < 24.9) {
-        mostrarDocumento(peso_normal.html, rutinaElement);
+        mostrarDocumento('peso_normal.html', rutinaElement);
         return 'Rutina de ejercicios recomendada para peso normal.';
     } else if (imc >= 25 && imc < 29.9) {
         mostrarDocumento('sobrepeso.html', rutinaElement);
@@ -40,33 +38,9 @@ function obtenerRutinaEjercicios(imc, sexo) {
     }
 }
 
-function verDocumento() {
-    var imc = obtenerIMC();
-    var sexo = document.getElementById('sexo').value;
-    var rutinaElement = document.getElementById('rutina');
-
-    switch (true) {
-        case (imc < 18.5):
-            mostrarDocumento('bajo_peso.html', rutinaElement);
-            break;
-        case (imc >= 18.5 && imc < 24.9):
-            mostrarDocumento('peso_normal.html', rutinaElement);
-            break;
-        case (imc >= 25 && imc < 29.9):
-            mostrarDocumento('sobrepeso.html', rutinaElement);
-            break;
-        default:
-            if (sexo === 'masculino') {
-                mostrarDocumento('obesidad_hombres.html', rutinaElement);
-            } else {
-                mostrarDocumento('obesidad_mujeres.html', rutinaElement);
-            }
-    }
-}
-
 function mostrarDocumento(documento, elemento) {
     // Carga el contenido del documento desde GitHub Pages
-    fetch(`https://tunombredeusuario.github.io/turepositorio/${documento}`)
+    fetch(`https://Nacho5901.github.io/TallerITU/${documento}`)
         .then(response => response.text())
         .then(content => {
             elemento.innerHTML = content;
