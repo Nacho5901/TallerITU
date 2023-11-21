@@ -17,26 +17,42 @@ function calcularIMC() {
     }
 }
 
+function verDocumento(categoriaIMC) {
+    // Obtener el elemento rutina
+    var rutinaElement = document.getElementById('rutina');
+    
+    // Llamar a la función mostrarDocumento con el nombre del documento y el elemento
+    mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
+}
+
+
 function obtenerRutinaEjercicios(imc, sexo) {
+    var categoriaIMC;
+
     if (imc < 18.5) {
-        mostrarDocumento('bajo_peso.html', rutinaElement);
+        categoriaIMC = 'bajo_peso';
         return 'Rutina de ejercicios recomendada para bajo peso.';
     } else if (imc >= 18.5 && imc < 24.9) {
-        mostrarDocumento('peso_normal.html', rutinaElement);
+        categoriaIMC = 'peso_normal';
         return 'Rutina de ejercicios recomendada para peso normal.';
     } else if (imc >= 25 && imc < 29.9) {
-        mostrarDocumento('sobrepeso.html', rutinaElement);
+        categoriaIMC = 'sobrepeso';
         return 'Rutina de ejercicios recomendada para sobrepeso.';
     } else {
         if (sexo === 'masculino') {
-            mostrarDocumento('obesidad_hombres.html', rutinaElement);
+            categoriaIMC = 'obesidad_hombres';
             return 'Rutina de ejercicios recomendada para obesidad en hombres.';
         } else {
-            mostrarDocumento('obesidad_mujeres.html', rutinaElement);
+            categoriaIMC = 'obesidad_mujeres';
             return 'Rutina de ejercicios recomendada para obesidad en mujeres.';
         }
     }
+
+    // Llamar a verDocumento con la categoría calculada
+    verDocumento(categoriaIMC);
 }
+
+
 
 function mostrarDocumento(documento, elemento) {
     // Carga el contenido del documento desde GitHub Pages
