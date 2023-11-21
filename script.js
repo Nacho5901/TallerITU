@@ -14,10 +14,9 @@ function calcularIMC() {
         var mensaje = obtenerRutinaEjercicios(imc, sexo);
         rutinaElement.innerHTML = mensaje;
 
-        // Si la función obtenerRutinaEjercicios devuelve una categoría, cargar el documento correspondiente
+        // Llamar a mostrarDocumento solo si se recomienda una rutina
         if (mensaje.includes('Rutina de ejercicios recomendada')) {
-            var categoriaIMC = mensaje.split(' ')[5];
-            mostrarDocumento(categoriaIMC);
+            mostrarDocumento(mensaje.split(' ')[5]);
         }
     } else {
         alert('Por favor, complete todos los campos.');
@@ -49,7 +48,7 @@ function obtenerRutinaEjercicios(imc, sexo) {
 
 function mostrarDocumento(documento) {
     // Carga el contenido del documento desde GitHub Pages
-    fetch(`https://nacho5901.github.io/TallerITU/${documento}`)
+    fetch(`https://tunombredeusuario.github.io/turepositorio/${documento}`)
         .then(response => response.text())
         .then(content => {
             var rutinaElement = document.getElementById('rutina');
