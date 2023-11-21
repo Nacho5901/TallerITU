@@ -1,21 +1,21 @@
+// Añade estas variables globales al inicio del archivo script.js
+var imc;
+var sexo;
+
 function calcularIMC() {
     var nombre = document.getElementById('nombre').value;
     var edad = document.getElementById('edad').value;
-    var sexo = document.getElementById('sexo').value;
+    sexo = document.getElementById('sexo').value;
     var altura = document.getElementById('altura').value;
     var peso = document.getElementById('peso').value;
 
     if (nombre && edad && sexo && altura && peso) {
-        var imc = peso / ((altura / 100) * (altura / 100));
+        imc = peso / ((altura / 100) * (altura / 100));
         var resultadoElement = document.getElementById('resultado');
         resultadoElement.innerHTML = 'Hola ' + nombre + ', tu IMC es: ' + imc.toFixed(2);
 
         var rutinaElement = document.getElementById('rutina');
         rutinaElement.innerHTML = 'Presiona "Ver Recomendaciones" para obtener sugerencias.';
-
-        // Almacena el IMC y sexo en variables globales para que estén disponibles en la función mostrarDocumento
-        window.imc = imc;
-        window.sexo = sexo;
     } else {
         alert('Por favor, complete todos los campos.');
     }
@@ -23,7 +23,7 @@ function calcularIMC() {
 
 function mostrarRecomendaciones() {
     // Llamar a mostrarDocumento solo si se recomienda una rutina
-    var mensaje = obtenerRutinaEjercicios(window.imc, window.sexo);
+    var mensaje = obtenerRutinaEjercicios(imc, sexo);
     if (mensaje.includes('Rutina de ejercicios recomendada')) {
         mostrarDocumento(mensaje.split(' ')[5]);
     }
