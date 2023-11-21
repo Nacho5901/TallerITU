@@ -31,24 +31,24 @@ function obtenerRutinaEjercicios(imc, sexo) {
 
     if (imc < 18.5) {
         categoriaIMC = 'bajo_peso';
-        mostrarDocumento(categoriaIMC);
+        mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
         return 'Rutina de ejercicios recomendada para bajo peso.';
     } else if (imc >= 18.5 && imc < 24.9) {
         categoriaIMC = 'peso_normal';
-        mostrarDocumento(categoriaIMC);
+        mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
         return 'Rutina de ejercicios recomendada para peso normal.';
     } else if (imc >= 25 && imc < 29.9) {
         categoriaIMC = 'sobrepeso';
-        mostrarDocumento(categoriaIMC);
+        mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
         return 'Rutina de ejercicios recomendada para sobrepeso.';
     } else {
         if (sexo === 'masculino') {
             categoriaIMC = 'obesidad_hombres';
-            mostrarDocumento(categoriaIMC);
+            mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
             return 'Rutina de ejercicios recomendada para obesidad en hombres.';
         } else {
             categoriaIMC = 'obesidad_mujeres';
-            mostrarDocumento(categoriaIMC);
+            mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
             return 'Rutina de ejercicios recomendada para obesidad en mujeres.';
         }
     }
