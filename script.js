@@ -11,58 +11,48 @@ function calcularIMC() {
         resultadoElement.innerHTML = 'Hola ' + nombre + ', tu IMC es: ' + imc.toFixed(2);
 
         var rutinaElement = document.getElementById('rutina');
-        rutinaElement.innerHTML = obtenerRutinaEjercicios(imc, sexo);
+        var mensaje = obtenerRutinaEjercicios(imc, sexo);
+        rutinaElement.innerHTML = mensaje;
+
+        // Si la función obtenerRutinaEjercicios devuelve una categoría, cargar el documento correspondiente
+        if (mensaje.includes('Rutina de ejercicios recomendada')) {
+            verDocumento(mensaje.split(' ')[5]);
+        }
     } else {
         alert('Por favor, complete todos los campos.');
     }
 }
 
-function verDocumento(categoriaIMC) {
-    // Obtener el elemento rutina
-    var rutinaElement = document.getElementById('rutina');
-    
-    // Llamar a la función mostrarDocumento con el nombre del documento y el elemento
-    mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
-}
-
-
 function obtenerRutinaEjercicios(imc, sexo) {
     var categoriaIMC;
 
     if (imc < 18.5) {
-        categoriaIMC = 'bajo_peso';
-        mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
+        categoriaIMC = 'bajo_peso.html';
         return 'Rutina de ejercicios recomendada para bajo peso.';
     } else if (imc >= 18.5 && imc < 24.9) {
-        categoriaIMC = 'peso_normal';
-        mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
+        categoriaIMC = 'peso_normal.html';
         return 'Rutina de ejercicios recomendada para peso normal.';
     } else if (imc >= 25 && imc < 29.9) {
-        categoriaIMC = 'sobrepeso';
-        mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
+        categoriaIMC = 'sobrepeso.html';
         return 'Rutina de ejercicios recomendada para sobrepeso.';
     } else {
         if (sexo === 'masculino') {
-            categoriaIMC = 'obesidad_hombres';
-            mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
+            categoriaIMC = 'obesidad_hombres.html';
             return 'Rutina de ejercicios recomendada para obesidad en hombres.';
         } else {
-            categoriaIMC = 'obesidad_mujeres';
-            mostrarDocumento(`${categoriaIMC}.html`, rutinaElement);
+            categoriaIMC = 'obesidad_mujeres.html';
             return 'Rutina de ejercicios recomendada para obesidad en mujeres.';
         }
     }
 }
 
-
-
-
-function mostrarDocumento(documento, elemento) {
+function mostrarDocumento(documento) {
     // Carga el contenido del documento desde GitHub Pages
-    fetch(`https://Nacho5901.github.io/TallerITU/${documento}`)
+    fetch(`https://tunombredeusuario.github.io/turepositorio/${documento}`)
         .then(response => response.text())
         .then(content => {
-            elemento.innerHTML = content;
+            var rutinaElement = document.getElementById('rutina');
+            rutinaElement.innerHTML = content;
         })
         .catch(error => {
             console.error('Error al cargar el documento:', error);
