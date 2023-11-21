@@ -48,7 +48,7 @@ function obtenerRutinaEjercicios(imc, sexo) {
 
 function mostrarDocumento(documento) {
     // Carga el contenido del documento desde GitHub Pages
-    fetch(`https://tunombredeusuario.github.io/turepositorio/${documento}`)
+    fetch(`https://nacho5901.github.io/TallerITU/${documento}`)
         .then(response => response.text())
         .then(content => {
             var rutinaElement = document.getElementById('rutina');
