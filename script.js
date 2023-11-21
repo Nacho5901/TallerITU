@@ -1,4 +1,3 @@
-// Añade estas variables globales al inicio del archivo script.js
 var imc;
 var sexo;
 
