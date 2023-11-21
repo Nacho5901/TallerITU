@@ -40,9 +40,33 @@ function obtenerRutinaEjercicios(imc, sexo) {
     }
 }
 
+function verDocumento() {
+    var imc = obtenerIMC();
+    var sexo = document.getElementById('sexo').value;
+    var rutinaElement = document.getElementById('rutina');
+
+    switch (true) {
+        case (imc < 18.5):
+            mostrarDocumento('bajo_peso.html', rutinaElement);
+            break;
+        case (imc >= 18.5 && imc < 24.9):
+            mostrarDocumento('peso_normal.html', rutinaElement);
+            break;
+        case (imc >= 25 && imc < 29.9):
+            mostrarDocumento('sobrepeso.html', rutinaElement);
+            break;
+        default:
+            if (sexo === 'masculino') {
+                mostrarDocumento('obesidad_hombres.html', rutinaElement);
+            } else {
+                mostrarDocumento('obesidad_mujeres.html', rutinaElement);
+            }
+    }
+}
+
 function mostrarDocumento(documento, elemento) {
-    // Carga el contenido del documento en el elemento especificado
-    fetch(`https://nacho5901.github.io/TallerITU/${documento}`)
+    // Carga el contenido del documento desde GitHub Pages
+    fetch(`https://tunombredeusuario.github.io/turepositorio/${documento}`)
         .then(response => response.text())
         .then(content => {
             elemento.innerHTML = content;
