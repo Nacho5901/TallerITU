@@ -11,15 +11,21 @@ function calcularIMC() {
         resultadoElement.innerHTML = 'Hola ' + nombre + ', tu IMC es: ' + imc.toFixed(2);
 
         var rutinaElement = document.getElementById('rutina');
-        var mensaje = obtenerRutinaEjercicios(imc, sexo);
-        rutinaElement.innerHTML = mensaje;
+        rutinaElement.innerHTML = 'Presiona "Ver Recomendaciones" para obtener sugerencias.';
 
-        // Llamar a mostrarDocumento solo si se recomienda una rutina
-        if (mensaje.includes('Rutina de ejercicios recomendada')) {
-            mostrarDocumento(mensaje.split(' ')[5]);
-        }
+        // Almacena el IMC y sexo en variables globales para que estén disponibles en la función mostrarDocumento
+        window.imc = imc;
+        window.sexo = sexo;
     } else {
         alert('Por favor, complete todos los campos.');
+    }
+}
+
+function mostrarRecomendaciones() {
+    // Llamar a mostrarDocumento solo si se recomienda una rutina
+    var mensaje = obtenerRutinaEjercicios(window.imc, window.sexo);
+    if (mensaje.includes('Rutina de ejercicios recomendada')) {
+        mostrarDocumento(mensaje.split(' ')[5]);
     }
 }
 
@@ -49,12 +55,19 @@ function obtenerRutinaEjercicios(imc, sexo) {
 function mostrarDocumento(documento) {
     // Carga el contenido del documento desde la misma ubicación que tu página principal
     fetch(documento)
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo cargar el documento.');
+            }
+            return response.text();
+        })
         .then(content => {
             var rutinaElement = document.getElementById('rutina');
             rutinaElement.innerHTML = content;
         })
         .catch(error => {
             console.error('Error al cargar el documento:', error);
+            var rutinaElement = document.getElementById('rutina');
+            rutinaElement.innerHTML = 'Error al cargar el documento.';
         });
 }
